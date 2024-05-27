@@ -77,7 +77,11 @@ header{
   left: 15%;
   width: 85%;
 }
+.meaning h4{
+  color: #757575;
+}
 .partOfSpeech{
+  font-style: italic;
   position: absolute;
   top: -8px;
 }
