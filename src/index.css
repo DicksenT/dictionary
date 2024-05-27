@@ -1,0 +1,108 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+.mainApp{
+  width: 375px;
+  padding: 24px;
+}
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.headerLeft{
+  height: 32px;
+}
+.headerRight,
+.fontSelect,
+.darkMode{
+  display: flex;
+  align-items: center;
+}
+.searchBar{
+  background-color: #f4f4f4;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+  border-radius: 14px;
+}
+.searchBar input{
+  outline: none;
+  border: none;
+  background-color: transparent;
+  width: 90%;
+  font-size: 16px;
+  height: 100%;
+  line-height: 32px;
+  font-weight: 700;
+}
+.wordContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  margin: 20px 0;
+}
+.phonetic{
+  color: #a445ed;
+}
+.submitBtn{
+  border: none;
+  background-color: transparent;
+}
+.playImg{
+  height: 52px;
+}
+.meaning{
+  position: relative;
+  padding: 35px 0;
+}
+.meaning:before{
+  content: "";
+  border-top: 1px solid #f4f4f4;
+  position: absolute;
+  top: 0;
+  left: 15%;
+  width: 85%;
+}
+.partOfSpeech{
+  position: absolute;
+  top: -8px;
+}
+.definitions{
+  padding: 8px 20px;
+}
+.definitions li{
+  list-style: none;
+}
+.definitions li:before{
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #a445ed;
+}
+.synonym{
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.synonym h2{
+  font-size: 16px;
+  color: #a445ed;
+}
+.word{
+  font-size: 24px;
+  text-transform: capitalize;
+}
