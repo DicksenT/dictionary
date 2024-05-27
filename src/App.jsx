@@ -65,21 +65,23 @@ function App() {
               <img className='playImg' src={play} alt="" />
            
           </section>
-          <section className='meaning'>
-            <h3 className="partOfSpeech">noun</h3>
-            <h4>Meaning</h4>
-            <ul className='definitions'>
-              <li>
-              (etc.) A set of keys used to operate a typewriter, computer etc.
-              </li>
-              <li>A component of many instruments including the piano, organ, and harpsichord consisting of usually black and white keys that cause different tones to be produced when struck.
-              </li>
-            </ul>
-            <div className='synonym'>
-            <p>Synonyms</p>
-            <h2>electric keyboard</h2>
-          </div>
+          {data.meanings.map((mean) =>(
+            <section className='meaning'>
+              <h3 className="partOfSpeech">{mean.partOfSpeech}</h3>
+              <h4>Meaning</h4>
+              <ul className='definitions'>
+                {mean.definitions.map((data) =>(
+                  <li>{data.definition}</li>
+                ))}
+              </ul>
+              {mean.synonyms.length > 0 && 
+                <div className='synonym'>
+                <p>Synonyms</p>
+                <h2>{mean.synonyms}</h2>
+              </div>}
           </section>
+          ))}
+          
           
         </article> :
         ''}
