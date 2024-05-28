@@ -77,12 +77,29 @@ function App() {
               {mean.synonyms.length > 0 && 
                 <div className='synonym'>
                 <p>Synonyms</p>
-                <h2>{mean.synonyms}</h2>
+                {mean.synonyms.map((synonym) =>(
+                <h2>{synonym}</h2>
+                ))}
               </div>}
+              {mean.antonyms.length > 0 &&
+                <div className="antonym">
+                  <p>Antonyms</p>
+                  {mean.antonyms.map((antonym) =>(
+                  <h2>{antonym}</h2>))}
+                </div>
+              }
           </section>
           ))}
-          
-          
+          <section className="source">
+            <p>Source</p>
+            {data.sourceUrls.map((url) =>(
+              <>
+              <h4>{url}
+              <img src={newWindow} alt=""/>
+              </h4>
+              </>
+            ))}
+          </section>
         </article> :
         ''}
       </main>
