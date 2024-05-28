@@ -52,7 +52,6 @@ header{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
   margin: 20px 0;
 }
 .phonetic{
@@ -63,11 +62,11 @@ header{
   background-color: transparent;
 }
 .playImg{
-  height: 52px;
+  height: 48px;
 }
 .meaning{
   position: relative;
-  padding: 35px 0;
+  padding: 32px 0;
 }
 .meaning:before{
   content: "";
@@ -77,8 +76,12 @@ header{
   left: 15%;
   width: 85%;
 }
-.meaning h4{
+.meaning h4,
+.synonym p,
+.antonym p,
+.source p{
   color: #757575;
+  font-weight: 500;
 }
 .partOfSpeech{
   font-style: italic;
@@ -87,6 +90,10 @@ header{
 }
 .definitions{
   padding: 8px 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
 }
 .definitions li{
   list-style: none;
@@ -97,16 +104,42 @@ header{
   left: 0;
   color: #a445ed;
 }
-.synonym{
+.synonym,
+.antonym{
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 12px;
+  margin-top: 20px;
 }
-.synonym h2{
+.synonym h2,
+.antonym h2{
   font-size: 16px;
   color: #a445ed;
 }
 .word{
-  font-size: 24px;
+  font-size: 28px;
   text-transform: capitalize;
+  margin-bottom: 8px;
+}
+.source{
+  border-top: 1px solid #f4f4f4;
+  padding-top: 32px;
+}
+.source p,
+.source h4:hover{
+  text-decoration: underline;
+}
+.source h4{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-weight: 500;
+  gap: 12px;
+  margin-top: 6px;
+}
+.word,
+.source h4{
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
 }
