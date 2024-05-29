@@ -20,7 +20,8 @@ header{
   justify-content: space-between;
   margin-bottom: 20px;
 }
-.headerLeft{
+.headerLeft,
+.headerRight{
   height: 32px;
 }
 .headerRight,
@@ -28,6 +29,21 @@ header{
 .darkMode{
   display: flex;
   align-items: center;
+}
+.headerRight{
+  gap: 20px;
+}
+.fontSelect{
+  gap: 12px;
+  border-right: 1px solid #e9e9e9;
+  padding-right: 12px;
+}
+.fontSelect p{
+  font-size: 14px;
+  font-weight: 600;
+}
+.fontSelect img{
+  width: 12px;
 }
 .searchBar{
   background-color: #f4f4f4;
@@ -142,4 +158,7 @@ header{
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-all;
+}
+audio{
+  width: 0;
 }
