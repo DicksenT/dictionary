@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import logo from '/images/logo.svg'
 import downArrow from '/images/icon-arrow-down.svg'
 import moon from '/images/icon-moon.svg'
@@ -11,16 +11,22 @@ function App() {
   const [searchInput, setSearchInput] = useState('')
   const [data, setData] = useState()
   const [finalInput, setFinalInput] = useState('welcome')
-
+  const [phonetic, setPhonetic] = useState('')
+  const [audio, setAudio] = useState()
+  const audioRef = useRef(null)
+  
   const handleSubmit = (e) =>{
     e.preventDefault()
     setFinalInput(searchInput)
   }
+
+ 
   useEffect(() =>{
     const getData = async() =>{
       try{
         const response = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${finalInput}`)
         setData(response.data[0])
+        getAudio()
       }
       catch(error){
         console.error(error);
@@ -30,9 +36,30 @@ function App() {
     getData()
   },[finalInput])
 
+  const getAudio = () =>{
+    if(data){
+      for(let i = 0;i < data.phonetics.length;i++){
+        if(data.phonetics[i].text && data.phonetics[i].audio){
+          setAudio(data.phonetics[i].audio)
+          setPhonetic(data.phonetics[i].text)
+          break
+        }
+      }
+    }
+  }
+
   useEffect(()=>{
-    console.log(data);
+    console.log(data)
+    getAudio();
   },[data])
+
+  useEffect(() =>{
+    console.log(audio);
+    console.log(phonetic);
+    if(audioRef.current){
+      audioRef.current.load()
+    }
+  },[audio])
 
   return (
     <div className='mainApp'>
@@ -59,11 +86,14 @@ function App() {
           <section className="wordContainer">
             <div className="read">
               <h1 className='word'>{data.word}</h1>
-              <h2 className='phonetic'>{data.phonetic}</h2>
+              <h2 className='phonetic'>{phonetic}</h2>
             </div>
-            
-              <img className='playImg' src={play} alt="" />
-           
+            <div className="audio">
+              <img className='playImg' src={play} alt="" onClick={() => audioRef.current.play()} />
+              <audio ref={audioRef} controls>
+                <source src={audio} type='audio/mpeg'/>
+              </audio>
+            </div>
           </section>
           {data.meanings.map((mean) =>(
             <section className='meaning'>
@@ -78,14 +108,14 @@ function App() {
                 <div className='synonym'>
                 <p>Synonyms</p>
                 {mean.synonyms.map((synonym) =>(
-                <h2>{synonym}</h2>
+                <h2 key={synonym}>{synonym}</h2>
                 ))}
               </div>}
               {mean.antonyms.length > 0 &&
                 <div className="antonym">
                   <p>Antonyms</p>
                   {mean.antonyms.map((antonym) =>(
-                  <h2>{antonym}</h2>))}
+                  <h2 key={antonym}>{antonym}</h2>))}
                 </div>
               }
           </section>
@@ -93,11 +123,11 @@ function App() {
           <section className="source">
             <p>Source</p>
             {data.sourceUrls.map((url) =>(
-              <>
+              <div key={url}>
               <h4>{url}
               <img src={newWindow} alt=""/>
               </h4>
-              </>
+              </div>
             ))}
           </section>
         </article> :
