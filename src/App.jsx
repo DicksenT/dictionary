@@ -44,6 +44,9 @@ function App() {
           setPhonetic(data.phonetics[i].text)
           break
         }
+        else{
+          setPhonetic(data.phonetic)
+        }
       }
     }
   }
@@ -59,7 +62,13 @@ function App() {
     if(audioRef.current){
       audioRef.current.load()
     }
-  },[audio])
+  },[audio, phonetic])
+
+  const changeInput = (newInput) =>{
+    console.log(newInput);
+    setFinalInput(newInput)
+    setSearchInput(newInput)
+  }
 
   return (
     <div className='mainApp'>
@@ -86,7 +95,7 @@ function App() {
           <section className="wordContainer">
             <div className="read">
               <h1 className='word'>{data.word}</h1>
-              <h2 className='phonetic'>{phonetic}</h2>
+              <h2 onClick={() => audioRef.current.play()} className='phonetic'>{phonetic}</h2>
             </div>
             <div className="audio">
               <img className='playImg' src={play} alt="" onClick={() => audioRef.current.play()} />
@@ -108,14 +117,14 @@ function App() {
                 <div className='synonym'>
                 <p>Synonyms</p>
                 {mean.synonyms.map((synonym) =>(
-                <h2 key={synonym}>{synonym}</h2>
+                <h2 onClick={() => changeInput(synonym)} key={synonym}>{synonym}</h2>
                 ))}
               </div>}
               {mean.antonyms.length > 0 &&
                 <div className="antonym">
                   <p>Antonyms</p>
                   {mean.antonyms.map((antonym) =>(
-                  <h2 key={antonym}>{antonym}</h2>))}
+                  <h2 onClick={() => changeInput(antonym)} key={antonym}>{antonym}</h2>))}
                 </div>
               }
           </section>
@@ -124,9 +133,11 @@ function App() {
             <p>Source</p>
             {data.sourceUrls.map((url) =>(
               <div key={url}>
-              <h4>{url}
-              <img src={newWindow} alt=""/>
-              </h4>
+              <a href={url} target='_blank'>
+                <h4>{url}
+                  <img src={newWindow} alt=""/>
+                </h4>
+              </a>
               </div>
             ))}
           </section>
