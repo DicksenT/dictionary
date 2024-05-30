@@ -14,7 +14,10 @@ function App() {
   const [phonetic, setPhonetic] = useState('')
   const [audio, setAudio] = useState()
   const audioRef = useRef(null)
-  
+  const fontList = ['Serif', 'Sans Serif', 'Mono']
+  const [changeFont, setChangeFont] = useState(false)
+
+
   const handleSubmit = (e) =>{
     e.preventDefault()
     setFinalInput(searchInput)
@@ -76,8 +79,17 @@ function App() {
         <img src={logo} alt="" className='headerLeft'/>
         <div className="headerRight">
           <div className="fontSelect">
-            <p>Mono</p>
-            <img src={downArrow} alt="" />
+            <div className="currentFont" onClick={() => setChangeFont(prev => !prev)}>
+              <p>Mono</p>
+              <img src={downArrow} alt="" />
+            </div>
+            {changeFont &&<ul className="fonts">
+              {fontList.map((font) =>(
+                <li>{font}</li>
+              ))}
+              </ul>
+              }
+            
           </div>
           <div className="darkMode">
             <img src={moon} alt="" />
