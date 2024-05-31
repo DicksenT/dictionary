@@ -16,6 +16,7 @@ function App() {
   const audioRef = useRef(null)
   const fontList = ['Serif', 'Sans Serif', 'Mono']
   const [changeFont, setChangeFont] = useState(false)
+  const [currentFont, setCurrentFont] = useState('Serif')
 
 
   const handleSubmit = (e) =>{
@@ -73,19 +74,29 @@ function App() {
     setSearchInput(newInput)
   }
 
+  const fonts = {
+    'Serif': 'serif',
+    'Sans Serif': 'sans-serif',
+    'Mono': 'monospace'
+  }
+  const fontActive = (font) =>{
+    setCurrentFont(font)
+    setChangeFont(false)
+  }
+
   return (
-    <div className='mainApp'>
+    <div className='mainApp' style={{fontFamily: fonts[currentFont]}}>
       <header>
         <img src={logo} alt="" className='headerLeft'/>
         <div className="headerRight">
           <div className="fontSelect">
             <div className="currentFont" onClick={() => setChangeFont(prev => !prev)}>
-              <p>Mono</p>
+              <p>{currentFont}</p>
               <img src={downArrow} alt="" />
             </div>
             {changeFont &&<ul className="fonts">
               {fontList.map((font) =>(
-                <li>{font}</li>
+                <li onClick={() => fontActive(font)} className={currentFont === font ? 'active' : ''}>{font}</li>
               ))}
               </ul>
               }
