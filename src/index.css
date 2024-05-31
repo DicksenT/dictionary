@@ -2,7 +2,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: monospace;
 }
 body{
   display: flex;
@@ -50,7 +49,6 @@ header{
   position: absolute;
   z-index: 1;
   width: 96px;
-  font-size: 12px;
   bottom: -86px;
   background-color: white;
   padding:  12px 12px;
@@ -59,12 +57,19 @@ header{
 }
 .fonts li{
   margin-bottom: 8px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.fonts li:hover,
+.active{
+  color: #a445ed;
 }
 .fonts li:last-child{
   margin: 0;
 }
-.fontSelect p{
-  font-size: 14px;
+.fontSelect p,
+.fonts{
+  font-size: 12px;
   font-weight: 600;
 }
 .fontSelect img{
