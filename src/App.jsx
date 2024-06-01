@@ -56,13 +56,10 @@ function App() {
   }
 
   useEffect(()=>{
-    console.log(data)
     getAudio();
   },[data])
 
   useEffect(() =>{
-    console.log(audio);
-    console.log(phonetic);
     if(audioRef.current){
       audioRef.current.load()
     }
@@ -81,20 +78,33 @@ function App() {
   }
   const fontActive = (font) =>{
     setCurrentFont(font)
-    setChangeFont(false)
   }
+
+  const fontRef = useRef(null)
+
+  useEffect(() =>{
+    const closeDropdown= (event) =>{
+      if(fontRef.current && !fontRef.current.contains(event.target)){
+        setChangeFont(false)
+      }
+    }
+    window.addEventListener('click', closeDropdown)
+    return()=>{
+      window.removeEventListener('click', closeDropdown)
+    }
+  },[])
 
   return (
     <div className='mainApp' style={{fontFamily: fonts[currentFont]}}>
       <header>
         <img src={logo} alt="" className='headerLeft'/>
         <div className="headerRight">
-          <div className="fontSelect">
-            <div className="currentFont" onClick={() => setChangeFont(prev => !prev)}>
+          <div className="fontSelect" ref={fontRef}>
+            <div className="currentFont" onClick={() => setChangeFont(prev => !prev)} >
               <p>{currentFont}</p>
               <img src={downArrow} alt="" />
             </div>
-            {changeFont &&<ul className="fonts">
+            {changeFont &&<ul className="fonts" >
               {fontList.map((font) =>(
                 <li onClick={() => fontActive(font)} className={currentFont === font ? 'active' : ''}>{font}</li>
               ))}
