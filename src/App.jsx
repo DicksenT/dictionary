@@ -17,6 +17,7 @@ function App() {
   const fontList = ['Serif', 'Sans Serif', 'Mono']
   const [changeFont, setChangeFont] = useState(false)
   const [currentFont, setCurrentFont] = useState('Serif')
+  const [darkmode, setDarkmode] = useState(false)
 
 
   const handleSubmit = (e) =>{
@@ -49,6 +50,7 @@ function App() {
           break
         }
         else{
+          setAudio('')
           setPhonetic(data.phonetic)
         }
       }
@@ -61,12 +63,13 @@ function App() {
 
   useEffect(() =>{
     if(audioRef.current){
+      console.log(audioRef.current);
       audioRef.current.load()
     }
-  },[audio, phonetic])
+    
+  },[audio])
 
   const changeInput = (newInput) =>{
-    console.log(newInput);
     setFinalInput(newInput)
     setSearchInput(newInput)
   }
@@ -76,9 +79,10 @@ function App() {
     'Sans Serif': 'sans-serif',
     'Mono': 'monospace'
   }
-  const fontActive = (font) =>{
-    setCurrentFont(font)
-  }
+  
+  useEffect(() =>{
+    console.log(data);
+  },[data])
 
   const fontRef = useRef(null)
 
@@ -93,9 +97,8 @@ function App() {
       window.removeEventListener('click', closeDropdown)
     }
   },[])
-
   return (
-    <div className='mainApp' style={{fontFamily: fonts[currentFont]}}>
+    <div className={`mainApp ${darkmode ? 'dark' : ''}`} style={{fontFamily: fonts[currentFont]}}>
       <header>
         <img src={logo} alt="" className='headerLeft'/>
         <div className="headerRight">
@@ -106,20 +109,24 @@ function App() {
             </div>
             {changeFont &&<ul className="fonts" >
               {fontList.map((font) =>(
-                <li onClick={() => fontActive(font)} className={currentFont === font ? 'active' : ''}>{font}</li>
+                <li onClick={() => setCurrentFont(font)} className={currentFont === font ? 'active' : ''}>{font}</li>
               ))}
               </ul>
               }
             
           </div>
           <div className="darkMode">
+            <label className="switch" >
+              <input type="checkbox" className='checkbox' onChange={() => setDarkmode((prevState) => !prevState)}/>
+              <span className='toggle'></span>
+              </label>
             <img src={moon} alt="" />
           </div>
         </div>
       </header>
       <main>
-        <form action="" className="searchBar" onSubmit={handleSubmit}>
-          <input type="text" value={searchInput} onChange={(e) => setSearchInput(e.currentTarget.value)}/>
+        <form action="" className={`searchBar ${darkmode? 'darkForm' : ''}`} onSubmit={handleSubmit}>
+          <input type="text" value={searchInput} onChange={(e) => setSearchInput(e.currentTarget.value)} />
           <button type='submit' className='submitBtn'>
           <img src={search} alt=""/>
           </button>
@@ -131,7 +138,12 @@ function App() {
               <h2 onClick={() => audioRef.current.play()} className='phonetic'>{phonetic}</h2>
             </div>
             <div className="audio">
-              <img className='playImg' src={play} alt="" onClick={() => audioRef.current.play()} />
+            <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 75 75" className='playImg' onClick={() => audioRef.current.play()}>
+              <g fill="#A445ED" fill-rule="evenodd">
+                <circle cx="37.5" cy="37.5" r="37.5" opacity=".25" className='circle'/>
+                <path d="M29 27v21l21-10.5z" className='path'/>
+              </g>
+              </svg>
               <audio ref={audioRef} controls>
                 <source src={audio} type='audio/mpeg'/>
               </audio>

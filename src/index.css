@@ -75,6 +75,49 @@ header{
 .fontSelect img{
   width: 12px;
 }
+.checkbox{
+  width: 0;
+}
+.switch{
+  position: relative;
+  width: 40px;
+}
+.toggle{
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #757575;
+  transition: .4s;
+}
+.toggle::after{
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  content: '';
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  background-color: white;
+  transition: .4s;
+}
+.checkbox:checked + .toggle{
+  background-color: #a445ed;
+}
+.checkbox:checked + .toggle::after{
+  left: 9px;
+  transform: translateX(14px);
+}
+.dark{
+  background-color: #050505 !important;
+  color: #f4f4f4;
+}
+.darkForm{
+  background-color: #2d2d2d !important;
+}
+.darkForm input{
+  color: #f4f4f4 !important;
+}
 .searchBar{
   background-color: #f4f4f4;
   height: 48px;
