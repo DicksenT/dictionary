@@ -113,14 +113,16 @@ function App() {
               ))}
               </ul>
               }
-            
           </div>
+          <div className="line"></div>
           <div className="darkMode">
             <label className="switch" >
               <input type="checkbox" className='checkbox' onChange={() => setDarkmode((prevState) => !prevState)}/>
               <span className='toggle'></span>
               </label>
-            <img src={moon} alt="" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                <path className={`${darkmode ? 'darkPurple' : ''}`} fill="none" stroke='#838383'stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M1 10.449a10.544 10.544 0 0 0 19.993 4.686C11.544 15.135 6.858 10.448 6.858 1A10.545 10.545 0 0 0 1 10.449Z"/>
+                </svg>
           </div>
         </div>
       </header>
@@ -139,8 +141,8 @@ function App() {
             </div>
             <div className="audio">
             <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 75 75" className='playImg' onClick={() => audioRef.current.play()}>
-              <g fill="#A445ED" fill-rule="evenodd">
-                <circle cx="37.5" cy="37.5" r="37.5" opacity=".25" className='circle'/>
+              <g  fill-rule="evenodd" className='play'>
+                <circle cx="37.5" cy="37.5" r="37.5" className='circle'/>
                 <path d="M29 27v21l21-10.5z" className='path'/>
               </g>
               </svg>
