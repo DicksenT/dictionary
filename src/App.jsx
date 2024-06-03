@@ -6,6 +6,7 @@ import newWindow from '/images/icon-new-window.svg'
 import play from '/images/icon-play.svg'
 import search from '/images/icon-search.svg'
 import axios from 'axios'
+import sad from '/images/sad.png'
 
 function App() {
   const [searchInput, setSearchInput] = useState('')
@@ -34,8 +35,7 @@ function App() {
         getAudio()
       }
       catch(error){
-        console.error(error);
-        console.log('noData :(');
+        setData(null)
       }
     }
     getData()
@@ -107,7 +107,7 @@ function App() {
               <p>{currentFont}</p>
               <img src={downArrow} alt="" />
             </div>
-            {changeFont &&<ul className="fonts" >
+            {changeFont &&<ul className={`fonts ${darkmode ? 'darkDropdown' : ''}`} >
               {fontList.map((font) =>(
                 <li onClick={() => setCurrentFont(font)} className={currentFont === font ? 'active' : ''}>{font}</li>
               ))}
@@ -180,16 +180,24 @@ function App() {
             <p>Source</p>
             {data.sourceUrls.map((url) =>(
               <div key={url}>
-              <a href={url} target='_blank'>
-                <h4>{url}
+              <a href={url} target='_blank' >
+                <h4 className={`originalLink ${darkmode ? 'dark ' : ''}`}>{url}
                   <img src={newWindow} alt=""/>
                 </h4>
               </a>
               </div>
             ))}
           </section>
-        </article> :
-        ''}
+        </article> 
+        
+        :
+        
+        <div className='noResult'>
+          <img src={sad} alt="Sad icons created by Illosalz - Flaticon" className="emoji" />
+          <h4 className="noDef">No Definitions Found</h4>
+          <p>Sorry pal, we couldn't find definitions for the word you were looking for. 
+            You can try the search again at later time or head to the web instead</p>
+        </div>}
       </main>
     </div>
   )
