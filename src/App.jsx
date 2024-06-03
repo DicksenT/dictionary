@@ -19,11 +19,17 @@ function App() {
   const [changeFont, setChangeFont] = useState(false)
   const [currentFont, setCurrentFont] = useState('Serif')
   const [darkmode, setDarkmode] = useState(false)
+  const [fontBorderColor, setFontBorderColor] = useState('#f4f4f4')
 
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    setFinalInput(searchInput)
+    if(searchInput){
+      setFinalInput(searchInput)
+    }
+    else{
+      setFontBorderColor('#ff5252')
+    }
   }
 
  
@@ -63,10 +69,8 @@ function App() {
 
   useEffect(() =>{
     if(audioRef.current){
-      console.log(audioRef.current);
       audioRef.current.load()
     }
-    
   },[audio])
 
   const changeInput = (newInput) =>{
@@ -97,6 +101,7 @@ function App() {
       window.removeEventListener('click', closeDropdown)
     }
   },[])
+
   return (
     <div className={`mainApp ${darkmode ? 'dark' : ''}`} style={{fontFamily: fonts[currentFont]}}>
       <header>
@@ -127,12 +132,20 @@ function App() {
         </div>
       </header>
       <main>
-        <form action="" className={`searchBar ${darkmode? 'darkForm' : ''}`} onSubmit={handleSubmit}>
-          <input type="text" value={searchInput} onChange={(e) => setSearchInput(e.currentTarget.value)} />
-          <button type='submit' className='submitBtn'>
-          <img src={search} alt=""/>
-          </button>
-        </form>
+        <div className="inputForm">
+          <form action="" 
+          className={`searchBar ${darkmode? 'darkForm' : ''}`} 
+          onSubmit={handleSubmit} 
+          style={{borderColor: fontBorderColor}}
+          onFocus={() => setFontBorderColor('#a445ed')}
+          onBlur={() => setFontBorderColor('#f4f4f4')}>
+            <input type="text" value={searchInput} onChange={(e) => setSearchInput(e.currentTarget.value)} />
+            <button type='submit' className='submitBtn'>
+            <img src={search} alt=""/>
+            </button>
+          </form>
+          <p className={fontBorderColor === '#ff5252' ? 'warning' : ''}>Whoops, Can't be empty...</p>
+        </div>
         {data ? <article>
           <section className="wordContainer">
             <div className="read">

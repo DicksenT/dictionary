@@ -154,12 +154,14 @@ circle:hover{
 }
 .searchBar{
   background-color: #f4f4f4;
+  border: 1px solid;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 8px 20px;
   border-radius: 14px;
+  transition: .2s;
 }
 .searchBar input{
   outline: none;
@@ -175,7 +177,7 @@ circle:hover{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 .phonetic{
   color: #a445ed;
@@ -293,4 +295,14 @@ audio{
 }
 .noResult p{
   text-align: center;
+}
+.inputForm p{
+  color: #ff5252;
+  font-size: 12px;
+  opacity: 0;
+  margin: 2.5px 0 ;
+  transition: 0.2s;
+}
+.warning{
+  opacity: 1 !important;
 }
