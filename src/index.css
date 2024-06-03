@@ -11,6 +11,7 @@ body{
 }
 .mainApp{
   width: 375px;
+  min-height: 100vh;
   padding: 24px;
 }
 header{
@@ -59,6 +60,7 @@ header{
   position: absolute;
   z-index: 1;
   width: 96px;
+  height: 85px;
   bottom: -86px;
   background-color: white;
   padding:  12px 12px;
@@ -118,9 +120,13 @@ header{
   left: 9px;
   transform: translateX(14px);
 }
-.dark{
+.dark,
+.darkDropdown{
   background-color: #050505 !important;
-  color: #f4f4f4;
+  color: #f4f4f4 !important;
+}
+.darkDropdown{
+  box-shadow: 0px 8px 20px 0px rgba(164, 69, 237, 0.5);
 }
 .darkForm{
   background-color: #2d2d2d !important;
@@ -248,10 +254,7 @@ li{
   border-top: 1px solid #f4f4f4;
   padding-top: 32px;
 }
-.source p,
-.source h4:hover{
-  text-decoration: underline;
-}
+
 .source h4{
   display: flex;
   align-items: center;
@@ -266,8 +269,28 @@ li{
   word-wrap: break-word;
   word-break: break-all;
 }
+.source h4{
+  color: black;
+}
+a{
+  text-decoration: none;
+}
 audio{
   width: 0;
   height: 0;
 }
-
+.noResult{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 120px;
+  gap: 10px;
+}
+.emoji{
+  width: 64px;
+  height: 64px;
+}
+.noResult p{
+  text-align: center;
+}
