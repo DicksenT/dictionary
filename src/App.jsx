@@ -47,6 +47,7 @@ function App() {
     getData()
   },[finalInput])
 
+  //Since Audio url on different object, so we loop to get the audio url and the phonetic
   const getAudio = () =>{
     if(data){
       for(let i = 0;i < data.phonetics.length;i++){
@@ -65,7 +66,6 @@ function App() {
 
   useEffect(()=>{
     getAudio();
-    console.log(data);
   },[data])
 
   useEffect(() =>{
@@ -74,21 +74,26 @@ function App() {
     }
   },[audio])
 
+
+  //meant to be change the searching if clicking any of the synonym or antonym
   const changeInput = (newInput) =>{
     setFinalInput(newInput)
     setSearchInput(newInput)
   }
 
+  //to get proper font family name based on name
   const fonts = {
     'Serif': 'serif',
     'Sans Serif': 'sans-serif',
     'Mono': 'monospace'
   }
   
+  //to close dropdown menu everytime clicked outside the target
   const fontRef = useRef(null)
+  const toggleRef = useRef(null)
   useEffect(() =>{
     const closeDropdown= (event) =>{
-      if(fontRef.current && !fontRef.current.contains(event.target)){
+      if(fontRef.current && !fontRef.current.contains(event.target) && !toggleRef.current.contains(event.target)){
         setChangeFont(false)
       }
     }
@@ -125,7 +130,7 @@ function App() {
               }
           </div>
           <div className="line"></div>
-          <div className="darkMode">
+          <div className="darkMode" ref={toggleRef}>
             <label className="switch" >
               <input type="checkbox" className='checkbox' onChange={() => setDarkmode((prevState) => !prevState)}/>
               <span className='toggle'></span>
