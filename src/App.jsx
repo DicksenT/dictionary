@@ -65,6 +65,7 @@ function App() {
 
   useEffect(()=>{
     getAudio();
+    console.log(data);
   },[data])
 
   useEffect(() =>{
@@ -170,7 +171,7 @@ function App() {
           </section>
           {data.meanings.map((mean) =>(
             <section className='meaning'>
-              <h3 className="partOfSpeech">{mean.partOfSpeech}</h3>
+              <h3 className={`partOfSpeech ${darkmode? 'dark' : ''}`}>{mean.partOfSpeech}</h3>
               <h4>Meaning</h4>
               <ul className='definitions'>
                 {mean.definitions.map((data) =>(

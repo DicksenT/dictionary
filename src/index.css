@@ -202,8 +202,7 @@ circle:hover{
   border-top: 1px solid #f4f4f4;
   position: absolute;
   top: 0;
-  left: 15%;
-  width: 85%;
+  width: 100%;
 }
 .meaning h4,
 .synonym p,
@@ -216,6 +215,8 @@ circle:hover{
   font-style: italic;
   position: absolute;
   top: -8px;
+  padding-right: 20px;
+  background-color: white;
 }
 .definitions{
   padding: 8px 20px;
@@ -328,10 +329,15 @@ audio{
     width: 75px;
     height: 75px;
   }
-  .definitions li{
+  .definitions li,
+  .fontSelect p,
+  .searchBar input,
+  .synonym h2,
+  .antonym h2,
+  .synonym,
+  .antonym{
     font-size: 20px;
   }
-
   .meaning h4,
   .partOfSpeech,
   .source{
@@ -340,9 +346,6 @@ audio{
   .partOfSpeech{
     font-size: 24px;
     top: -12px;
-  }
-  .fontSelect p{
-    font-size: 20px;
   }
   .headerRight{
     width: 300px;
@@ -362,5 +365,12 @@ audio{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+  }
+  .inputForm p{
+    font-size: 16px;
+  }
+  .searchBar{
+    height: 64px;
+    border-radius: 20px;
   }
 }
