@@ -306,3 +306,61 @@ audio{
 .warning{
   opacity: 1 !important;
 }
+
+@media (min-width:768px) {
+  .mainApp{
+    width: 768px;
+  }
+}
+@media (min-width:1440px){
+  .mainApp{
+    width: 1024px;
+    padding: 32px 24px;
+  }
+  .word{
+    font-size: 64px;
+  }
+  .phonetic{
+    font-size: 32px;
+  }
+  .playImg,
+  .audio{
+    width: 75px;
+    height: 75px;
+  }
+  .definitions li{
+    font-size: 20px;
+  }
+
+  .meaning h4,
+  .partOfSpeech,
+  .source{
+    font-size: 24px;
+  }
+  .partOfSpeech{
+    font-size: 24px;
+    top: -12px;
+  }
+  .fontSelect p{
+    font-size: 20px;
+  }
+  .headerRight{
+    width: 300px;
+  }
+  .fontSelect{
+    width: 150px;
+  }
+  .currentFont{
+    gap: 20px;
+    width: 150px;
+  }
+  .fonts{
+    width: 150px;
+    height: 150px;
+    bottom: -150px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+}

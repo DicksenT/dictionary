@@ -11,7 +11,7 @@ import sad from '/images/sad.png'
 function App() {
   const [searchInput, setSearchInput] = useState('')
   const [data, setData] = useState()
-  const [finalInput, setFinalInput] = useState('welcome')
+  const [finalInput, setFinalInput] = useState('dictionary')
   const [phonetic, setPhonetic] = useState('')
   const [audio, setAudio] = useState()
   const audioRef = useRef(null)
@@ -84,12 +84,7 @@ function App() {
     'Mono': 'monospace'
   }
   
-  useEffect(() =>{
-    console.log(data);
-  },[data])
-
   const fontRef = useRef(null)
-
   useEffect(() =>{
     const closeDropdown= (event) =>{
       if(fontRef.current && !fontRef.current.contains(event.target)){
@@ -102,8 +97,17 @@ function App() {
     }
   },[])
 
+  useEffect(() =>{
+    if(darkmode){
+      document.body.classList.add('dark')
+    }
+    else{
+      document.body.classList.remove('dark')
+    }
+  },[darkmode])
+
   return (
-    <div className={`mainApp ${darkmode ? 'dark' : ''}`} style={{fontFamily: fonts[currentFont]}}>
+    <div className={`mainApp`} style={{fontFamily: fonts[currentFont]}}>
       <header>
         <img src={logo} alt="" className='headerLeft'/>
         <div className="headerRight">
